@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+#_*_ encoding: utf-8 _*_
+
+from sys import argv
+from sys import exit
+
+GARBAGE = (
+    '\u200b',  # ZERO WIDTH SPACE
+    '\u200c',  # ZERO WIDTH NON-JOINER
+    '\u200d',  # ZERO WIDTH JOINER
+    '\u200e',  # LEFT-TO-RIGHT MARK
+    '\u200f',  # RIGHT-TO-LEFT MARK
+    '\u202a',  # LEFT-TO-RIGHT EMBEDDING
+    '\u202b',  # RIGHT-TO-LEFT EMBEDDING
+    '\u202c',  # POP DIRECTIONAL FORMATTING
+    '\u202d',  # LEFT-TO-RIGHT OVERRIDE
+    '\u202e',  # RIGHT-TO-LEFT OVERRIDE
+    '\ufeff',  # ZERO WIDTH NO-BREAK SPACE (BOM)    
+)
+
+
+def rem_inv_char(t: str) -> str:
+    '''
+    Remove invisible characters
+    '''
+    return ''.join(c for c in t if c not in GARBAGE)
+
+def clr_file(input_file: str, output_file: str):
+    '''
+    Clear file from garbage characters
+    '''
+
+    # Read the input file
+    with open(input_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    clean_content = rem_inv_char(content)
+
+    # Write the output file
+    with open(output_file, 'w', encoding='utf-8') as f:
+        f.write(clean_content)
+
+def get_args() -> tuple:
+    try:
+        input_file = argv[1]
+
+    except IndexError:
+        exit(0)
+
+    try:
+        output_file = argv[2]
+
+    except IndexError:
+        output_file = '/dev/stdout'
+
+    return input_file, output_file      
+
+# ============================================================================
+if __name__ == '__main__':
+    args = get_args()
+    input_file = args[0]  # First argument
+    output_file = args[1]  # Second argument
+    clr_file(input_file, output_file)
+    
