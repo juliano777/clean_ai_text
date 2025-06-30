@@ -1,2 +1,3 @@
 # clean_ai_text
-Clean AI-generated texts from hidden characters
+
+Clean AI-generated texts from hidden characters.
