@@ -22,7 +22,7 @@ chmod +x clean_ai_text
 ```
 
 Copy the script to any directory in your
-[`\$PATH`](https://en.wikipedia.org/wiki/PATH_(variable), e. g.; `$HOME/bin`:
+[$PATH](https://en.wikipedia.org/wiki/PATH_(variable), e. g.; `$HOME/bin`:
 ```bash
 cp clean_ai_text
 ```
